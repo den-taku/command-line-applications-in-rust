@@ -2,6 +2,12 @@ use structopt::StructOpt;
 
 fn main() {
     let args = Cli::from_args();
+    let content = std::fs::read_to_string(&args.path).expect("could not read file");
+    for line in content.lines() {
+        if line.contains(&args.pattern) {
+            println!("{}", line);
+        }
+    }
 }
 
 /// Search for a patter in a file and display the lines that contain it.
