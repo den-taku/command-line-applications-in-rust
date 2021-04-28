@@ -1,4 +1,15 @@
 use anyhow::Result;
+use structopt::StructOpt;
+
+/// Search for a patter in a file and display the lines that contain it.
+#[derive(StructOpt)]
+pub struct Cli {
+    /// The pattern to look for
+    pub pattern: String,
+    /// The path to the file to read
+    #[structopt(parse(from_os_str))]
+    pub path: std::path::PathBuf,
+}
 
 pub fn find_matches(content: &str, pattern: &str, mut writer: impl std::io::Write) -> Result<()> {
     for line in content.lines() {
