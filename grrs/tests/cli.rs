@@ -37,9 +37,9 @@ fn passing_an_emmpty_string_as_pattern() -> Result<(), Box<dyn std::error::Error
 
     let mut cmd = Command::cargo_bin("grrs")?;
     cmd.arg(file.path());
-    cmd.assert()
-        .failure()
-        .stderr(predicate::str::contains("The following required arguments were not provided"));
+    cmd.assert().failure().stderr(predicate::str::contains(
+        "The following required arguments were not provided",
+    ));
 
     Ok(())
 }
